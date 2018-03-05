@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    form(method='POST' action='filetoupload' enctype='multipart/form-data')
+        div(data-role='fieldcontain')   
+            input(type='file' name='filetoupload')
+        input(type='submit' value='Send')
