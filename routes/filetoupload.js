@@ -1,25 +1,33 @@
 var express = require('express');
 var formidable = require('formidable');
 var mv = require('mv');
+var readChunk = require('read-chunk');
+var fileType = require('file-type');
+var crypto = require('crypto');
+
 var router = express.Router();
 
-/* GET users listing. */
+/* POST file handling. */
 router.post('/', function(req, res, next) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
         if (Object.keys(files).length > 0 && files.filetoupload.name != '') {
-            var oldpath = files.filetoupload.path; 
-            var newpath = __dirname + '/' + files.filetoupload.name;
-            console.log(files);
-            mv(oldpath, newpath, function (err) {
-                if (err) throw err;
-                res.write('File uploaded and moved!');
+            var imageType = fileType(readChunk.sync(files.filetoupload.path, 0, 4100));
+            if (imageType && imageType['mime'].indexOf('image') >= 0) {
+                var oldpath = files.filetoupload.path; 
+                var newfilename = crypto.randomBytes(5).toString('hex') + '_' + files.filetoupload.name;
+                var newpath = __dirname + '/../public/file_storage/' + newfilename;
+                mv(oldpath, newpath, function (err) {
+                    if (err) throw err;
+                    res.send('http://' + req.headers.host + /file_storage/ + newfilename); // Send image url.
+                    res.end();
+                });
+            }
+            else {
+                res.status(415);
+                res.send('This is not an image !')
                 res.end();
-            });
-        }
-        else {
-            res.write('No file to upload');
-            res.end();
+            }
         }
     });
 });
