@@ -5,7 +5,7 @@ Dropzone.options.dzone = {
 	clickable: true,
 	init: function() {
 		this.on('success', function(file, response) {
-		    file.previewTemplate.setAttribute('onclick', 'window.location.assign(\"' + response + '\");');
+		    file.previewTemplate.setAttribute('onclick', 'window.open(\"' + response + '\", \"_blank\");');
 		});
 	},
 };

@@ -7,6 +7,7 @@ var crypto = require('crypto');
 
 var router = express.Router();
 
+
 /* POST file handling. */
 router.post('/', function(req, res, next) {
     var form = new formidable.IncomingForm();
@@ -16,7 +17,7 @@ router.post('/', function(req, res, next) {
             if (imageType && imageType['mime'].indexOf('image') >= 0) {
                 var oldpath = files.filetoupload.path; 
                 var newfilename = crypto.randomBytes(5).toString('hex') + '_' + files.filetoupload.name;
-                var newpath = __dirname + '/../public/file_storage/' + newfilename;
+                var newpath = appRoot + '/public/file_storage/' + newfilename;
                 mv(oldpath, newpath, function (err) {
                     if (err) throw err;
                     res.send('http://' + req.headers.host + /file_storage/ + newfilename); // Send image url.

@@ -2,6 +2,6 @@ extends layout
 
 block content
     form.dropzone#dzone(method='POST' action='filetoupload' enctype='multipart/form-data')
-        i.far.fa-upload
+        div.fa.fa-upload
         div.fallback
             input(type='file' name='filetoupload' multiple)
