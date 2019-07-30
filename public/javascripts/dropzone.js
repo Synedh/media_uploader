@@ -739,6 +739,7 @@ var Dropzone = function (_Emitter) {
           var _this2 = this;
 
           if (this.element === this.previewsContainer) {
+            console.log(this);
             this.element.classList.add("dz-started");
           }
 

@@ -1,9 +1,10 @@
-var express = require('express');
-var formidable = require('formidable');
 var mv = require('mv');
-var readChunk = require('read-chunk');
-var fileType = require('file-type');
+var fs = require('fs');
 var crypto = require('crypto');
+var express = require('express');
+var fileType = require('file-type');
+var readChunk = require('read-chunk');
+var formidable = require('formidable');
 
 var router = express.Router();
 
@@ -16,6 +17,7 @@ router.post('/', function(req, res, next) {
             var imageType = fileType(readChunk.sync(files.filetoupload.path, 0, 4100));
             if (imageType && imageType['mime'].indexOf('image') >= 0) {
                 var oldpath = files.filetoupload.path; 
+                var date = new Date()
                 var newfilename = crypto.randomBytes(5).toString('hex') + '_' + files.filetoupload.name;
                 var newpath = appRoot + '/public/file_storage/' + newfilename;
                 mv(oldpath, newpath, function (err) {

@@ -11,12 +11,12 @@
     "cookie-parser": "~1.4.3",
     "crypto": "^1.0.1",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "^4.17.1",
     "file-type": "^7.6.0",
     "formidable": "^1.1.1",
-    "morgan": "~1.9.0",
+    "morgan": "^1.9.1",
     "mv": "^2.1.1",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.4",
     "read-chunk": "^2.1.0",
     "serve-favicon": "~2.4.5"
   }

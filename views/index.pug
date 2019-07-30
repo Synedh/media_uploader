@@ -1,7 +1,10 @@
 extends layout
 
 block content
-    form.dropzone#dzone(method='POST' action='filetoupload' enctype='multipart/form-data')
-        div.fa.fa-upload
-        div.fallback
-            input(type='file' name='filetoupload' multiple)
+    div.content
+        h1.title Up.Synedh
+        form.dropzone#dzone(method='POST' action='filetoupload' enctype='multipart/form-data')
+            div.dz-default.dz-message
+                i(aria-hidden='true').fa.fa-upload.fa-5x
+            div.fallback
+                input(type='file' name='filetoupload' multiple)

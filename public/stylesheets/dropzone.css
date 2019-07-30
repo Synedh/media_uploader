@@ -174,16 +174,15 @@
   box-sizing: border-box; }
 
 .dropzone {
+  position: relative;
   min-height: 150px;
-  border: 2px dashed #DDD;
+  border: 3px dashed #DDD;
   border-radius: 10px;
-  background-color: #333;
-  color: #DDD;
-  padding: 20px 20px; }
+  text-align: center;
+  margin: 0px 50px 50px 50px;
+  flex-grow: 1; }
   .dropzone.dz-clickable {
     cursor: pointer; }
-    /*.dropzone.dz-clickable * {
-      cursor: default; }*/
     .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
       cursor: pointer; }
   .dropzone.dz-started .dz-message {
@@ -193,13 +192,19 @@
     .dropzone.dz-drag-hover .dz-message {
       opacity: 0.5; }
   .dropzone .dz-message {
+    width: 100%;
     text-align: center;
-    margin: 2em 0; }
+    position: absolute;
+    top: 40%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
   .dropzone .dz-preview {
     position: relative;
     display: inline-block;
     vertical-align: top;
-    margin: 16px;
+    width: 120px;
+    margin: 1em;
+    cursor: pointer;
     min-height: 100px; }
     .dropzone .dz-preview:hover {
       z-index: 1000; }
@@ -295,10 +300,13 @@
       opacity: 0;
       z-index: 500;
       position: absolute;
-      display: block;
-      top: 50%;
+      display: none;
+      left: 30px;
+      top: 30px;
+      width: 54px;
+      height: 58px;
       left: 50%;
-      margin-left: -27px;
+      margin-left: -27px; 
       margin-top: -27px; }
       .dropzone .dz-preview .dz-success-mark svg, .dropzone .dz-preview .dz-error-mark svg {
         display: block;
@@ -325,11 +333,13 @@
       -o-animation: pulse 6s ease infinite;
       animation: pulse 6s ease infinite; }
     .dropzone .dz-preview .dz-progress {
+      display: block;
+      border: 1px solid #aaa; 
       opacity: 1;
       z-index: 1000;
       pointer-events: none;
       position: absolute;
-      height: 16px;
+      height: 15px;
       left: 50%;
       top: 50%;
       margin-top: -8px;
@@ -340,9 +350,12 @@
       border-radius: 8px;
       overflow: hidden; }
       .dropzone .dz-preview .dz-progress .dz-upload {
-        background: #333;
+        background: green; 
         background: linear-gradient(to bottom, #666, #444);
         position: absolute;
+        display: block;
+        height: 100%;
+        width: 0;
         top: 0;
         left: 0;
         bottom: 0;
@@ -361,8 +374,8 @@
       pointer-events: none;
       z-index: 1000;
       position: absolute;
-      display: block;
-      display: none;
+      color: red;
+      display: none; 
       opacity: 0;
       -webkit-transition: opacity 0.3s ease;
       -moz-transition: opacity 0.3s ease;
@@ -376,7 +389,7 @@
       width: 140px;
       background: #be2626;
       background: linear-gradient(to bottom, #be2626, #a92222);
-      padding: 0.5em 1.2em;
+      padding: 1em 1.2em;
       color: white; }
       .dropzone .dz-preview .dz-error-message:after {
         content: '';

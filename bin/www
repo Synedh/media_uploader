@@ -13,6 +13,9 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '3000');
+
+global.appRoot = path.resolve(__dirname);
+global.storage_folder = global.appRoot + '/files_storage/'
 app.set('port', port);
 
 /**
