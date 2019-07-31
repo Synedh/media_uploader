@@ -2,7 +2,8 @@ extends layout
 
 block content
     div.content
-        h1.title Up.Synedh
+        h1.title
+            a(href="/") Up.Synedh
         form.dropzone#dzone(method='POST' action='filetoupload' enctype='multipart/form-data')
             div.dz-default.dz-message
                 i(aria-hidden='true').fa.fa-upload.fa-5x

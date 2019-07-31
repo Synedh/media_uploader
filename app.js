@@ -10,7 +10,7 @@ var filetoupload = require('./routes/filetoupload');
 
 var app = express();
 global.appRoot = path.resolve(__dirname);
-global.storage_folder = ((process.env.STORAGE) ? process.env.STORAGE : global.appRoot + '/files_storage/');
+global.storage_folder = ((process.env.STORAGE) ? process.env.STORAGE : global.appRoot + '/public/file_storage');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

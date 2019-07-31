@@ -17,14 +17,36 @@ router.post('/', function(req, res, next) {
             var imageType = fileType(readChunk.sync(files.filetoupload.path, 0, 4100));
             if (imageType && imageType['mime'].indexOf('image') >= 0) {
                 var oldpath = files.filetoupload.path; 
-                var date = new Date()
+                var date = new Date();
+                var storage_path = '/' + new Date().toISOString().substr(0, 7);
                 var newfilename = crypto.randomBytes(5).toString('hex') + '_' + files.filetoupload.name;
-                var newpath = appRoot + '/public/file_storage/' + newfilename;
-                mv(oldpath, newpath, function (err) {
-                    if (err) throw err;
-                    res.send('http://' + req.headers.host + /file_storage/ + newfilename); // Send image url.
-                    res.end();
+                var newpath = storage_folder + storage_path + '/' + newfilename;
+
+                fs.access(storage_folder, function(err) {
+                    if (err && err.code === 'ENOENT') {
+                        fs.mkdir(storage_folder, function(err) { if (err) { throw err; } else { create_month_folder(); }});
+                    } else {
+                        create_month_folder();
+                    }
                 });
+
+                function create_month_folder() {
+                    fs.access(storage_folder + storage_path, function(err) {
+                        if (err && err.code === 'ENOENT') {
+                            fs.mkdir(storage_folder + storage_path, function(err) { if (err) { throw err; } else { mv_send(); }});
+                        } else {
+                            mv_send()
+                        }
+                    });
+                }
+                function mv_send() {
+                    mv(oldpath, newpath, function (err) {
+                        if (err) throw err;
+                        res.send('http://' + req.headers.host + '/file_storage'  + storage_path + '/' + newfilename); // Send image url.
+                        res.end();
+                        console.log(newpath);
+                    });
+                }
             }
             else {
                 res.status(415);

@@ -24,3 +24,8 @@ h1 {
     text-align: center;
     margin: 10px 0;
 }
+
+h1 a {
+    text-decoration: none;
+    color: inherit;
+}
